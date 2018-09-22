@@ -18,6 +18,7 @@
 	<description>Demo project for Spring Boot</description>
 
 	<modules>
+		<module>sword-component-ds</module>
 		<module>sword-component-shiro</module>
 	</modules>
 

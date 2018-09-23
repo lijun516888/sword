@@ -1,0 +1,37 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.sword.module.ds.DataSourceProperties",
+      "name": "sword.ds",
+      "type": "com.sword.module.ds.DataSourceProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.sword.module.ds.DataSourceProperties",
+      "name": "sword.ds.url",
+      "description": "必填：jdbc url",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sword.module.ds.DataSourceProperties",
+      "name": "sword.ds.username",
+      "description": "必填：数据库用户名",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sword.module.ds.DataSourceProperties",
+      "name": "sword.ds.password",
+      "description": "必填：数据库密码",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sword.module.ds.DataSourceProperties",
+      "defaultValue": true,
+      "name": "sword.ds.enable",
+      "description": "是否启用此组件",
+      "type": "java.lang.Boolean"
+    }
+  ]
+}

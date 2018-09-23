@@ -10,6 +10,7 @@
 	</parent>
 
 	<artifactId>sword-core</artifactId>
+	<packaging>jar</packaging>
 
 	<name>sword-core</name>
 	<description>Demo project for Spring Boot</description>

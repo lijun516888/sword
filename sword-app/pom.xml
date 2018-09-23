@@ -10,16 +10,12 @@
 	</parent>
 
 	<artifactId>sword-app</artifactId>
+	<packaging>jar</packaging>
 
 	<name>sword-app</name>
 	<description>Demo project for Spring Boot</description>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.sword</groupId>
-			<artifactId>sword-component-ds</artifactId>
-			<version>${project.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>com.sword</groupId>
 			<artifactId>sword-core</artifactId>

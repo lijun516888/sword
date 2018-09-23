@@ -29,9 +29,9 @@ public class DataSourceAutoConfig {
     public DataSource dataSource() {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassLoader(ClassUtils.getDefaultClassLoader());
-        dataSource.setUrl("jdbc:mysql://localhost:3306/amooly?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false");
-        dataSource.setUsername("root");
-        dataSource.setPassword("12qwaszx!");
+        dataSource.setUrl(dataSourceProperties.getUrl());
+        dataSource.setUsername(dataSourceProperties.getUsername());
+        dataSource.setPassword(dataSourceProperties.getPassword());
         dataSource.setInitialSize(5);
         dataSource.setMinIdle(20);
         dataSource.setMaxActive(300);
@@ -48,8 +48,8 @@ public class DataSourceAutoConfig {
         dataSource.setValidationQuery("select 'x'");
         dataSource.setValidationQueryTimeout(2);
         Properties properties = new Properties();
-        properties.put("druid.stat.slowSqlMillis", "0");
-        properties.put("druid.stat.logSlowSql", Boolean.TRUE.toString());
+        properties.put("druid.stat.slowSqlMillis", dataSourceProperties.getSlowSqlMillis());
+        properties.put("druid.stat.logSlowSql", Boolean.toString(dataSourceProperties.isLogSlowSql()));
         dataSource.setConnectProperties(properties);
         try {
             dataSource.setFilters("stat");

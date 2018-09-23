@@ -18,6 +18,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.sword</groupId>
+			<artifactId>sword-component-ds</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sword</groupId>
 			<artifactId>sword-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>

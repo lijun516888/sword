@@ -32,6 +32,20 @@
       "name": "sword.ds.enable",
       "description": "是否启用此组件",
       "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.sword.module.ds.DataSourceProperties",
+      "defaultValue": "2",
+      "name": "sword.ds.slow-sql-millis",
+      "description": "查询超过多少秒显示慢SQL",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sword.module.ds.DataSourceProperties",
+      "defaultValue": true,
+      "name": "sword.ds.log-slow-Sql",
+      "description": "慢SQL日志记录",
+      "type": "java.lang.Boolean"
     }
   ]
 }

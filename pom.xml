@@ -33,6 +33,8 @@
         <mybatis.version>1.1.1</mybatis.version>
         <pagehelper.version>5.0.0</pagehelper.version>
         <tk.mybatis.mapper>1.1.0</tk.mybatis.mapper>
+
+		<sword.component.version>6.0.0-SNAPSHOT</sword.component.version>
 	</properties>
 
 	<dependencyManagement>
@@ -83,8 +85,18 @@
 			<!-- compnents -->
 			<dependency>
 				<groupId>com.sword</groupId>
+				<artifactId>sword-component-ds</artifactId>
+				<version>${sword.component.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sword</groupId>
 				<artifactId>sword-component-mybatis</artifactId>
-				<version>6.0.0-SNAPSHOT</version>
+				<version>${sword.component.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sword</groupId>
+				<artifactId>sword-component-shiro</artifactId>
+				<version>${sword.component.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

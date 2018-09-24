@@ -28,7 +28,7 @@ public class MapperScannerRegistrar implements BeanFactoryAware, ImportBeanDefin
             }
             scanner.setMarkerInterface(EntityMybatisDao.class);
             scanner.registerFilters();
-            List<String> daoScanPackages = Arrays.asList("com.sword.**.mapper");
+            List<String> daoScanPackages = Arrays.asList("com.**.mapper");
             scanner.doScan((String[]) daoScanPackages.toArray(new String[daoScanPackages.size()]));
         } catch (IllegalStateException var9) {
             var9.printStackTrace();

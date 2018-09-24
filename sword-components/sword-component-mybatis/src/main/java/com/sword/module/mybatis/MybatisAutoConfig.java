@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.util.ObjectUtils;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 @Configuration

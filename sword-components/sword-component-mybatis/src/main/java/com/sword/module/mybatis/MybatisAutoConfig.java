@@ -24,9 +24,6 @@ import javax.sql.DataSource;
 @ConditionalOnBean(DataSource.class)
 public class MybatisAutoConfig {
 
-    @Resource
-    private DataSource dataSource;
-
     @Bean
     public Interceptor[] interceptors() {
         Interceptor[] interceptors = new Interceptor[1];
@@ -35,7 +32,7 @@ public class MybatisAutoConfig {
     }
 
     @Bean
-    public SqlSessionFactory sqlSessionFactory(Interceptor[] interceptors) {
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource, Interceptor[] interceptors) {
         SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
         factory.setDataSource(dataSource);
         /**

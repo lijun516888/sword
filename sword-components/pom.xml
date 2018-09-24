@@ -21,6 +21,7 @@
 		<module>sword-component-ds</module>
 		<module>sword-component-shiro</module>
 		<module>sword-component-mybatis</module>
+		<module>sword-component-sj</module>
 	</modules>
 
 </project>

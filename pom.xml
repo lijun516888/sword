@@ -35,6 +35,9 @@
         <tk.mybatis.mapper>1.1.0</tk.mybatis.mapper>
 
 		<sword.component.version>6.0.0-SNAPSHOT</sword.component.version>
+
+		<shardingjdbc.core.version>2.0.3</shardingjdbc.core.version>
+		<sharding-sphere.version>3.0.0.M3</sharding-sphere.version>
 	</properties>
 
 	<dependencyManagement>
@@ -98,6 +101,22 @@
 				<artifactId>sword-component-shiro</artifactId>
 				<version>${sword.component.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.sword</groupId>
+				<artifactId>sword-component-sj</artifactId>
+				<version>${sword.component.version}</version>
+			</dependency>
+			<!-- shardingjdbc -->
+			<dependency>
+				<groupId>io.shardingsphere</groupId>
+				<artifactId>sharding-jdbc</artifactId>
+				<version>${sharding-sphere.version}</version>
+			</dependency>
+			<!--<dependency>
+				<groupId>io.shardingsphere</groupId>
+				<artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+				<version>${sharding-sphere.version}</version>
+			</dependency>-->
 		</dependencies>
 	</dependencyManagement>
 

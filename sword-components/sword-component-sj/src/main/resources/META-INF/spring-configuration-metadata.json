@@ -1,0 +1,18 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.sword.module.sj.ShardingJdbcProperties",
+      "name": "sword.sj",
+      "type": "com.sword.module.sj.ShardingJdbcProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.sword.module.sj.ShardingJdbcProperties",
+      "name": "sword.sj.enable",
+      "description": "是否启动组件",
+      "type": "java.lang.Boolean"
+    }
+  ]
+}

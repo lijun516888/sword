@@ -18,7 +18,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.sword</groupId>
-			<artifactId>sword-component-ds</artifactId>
+			<artifactId>sword-component-mybatis</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

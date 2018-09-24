@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.sword.module.shiro.ShiroAutoConfig
+com.sword.module.mybatis.MybatisAutoConfig,\
+com.sword.module.mybatis.MapperAutoConfig

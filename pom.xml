@@ -26,6 +26,13 @@
 		<dom4j.version>1.6.1</dom4j.version>
 		<alibaba.version>1.1.9</alibaba.version>
 		<mysql.version>5.1.46</mysql.version>
+		<google.guava.version>20.0</google.guava.version>
+		<commons.lang3.version>3.4</commons.lang3.version>
+		<javassist.version>3.21.0-GA</javassist.version>
+
+        <mybatis.version>1.1.1</mybatis.version>
+        <pagehelper.version>5.0.0</pagehelper.version>
+        <tk.mybatis.mapper>1.1.0</tk.mybatis.mapper>
 	</properties>
 
 	<dependencyManagement>
@@ -57,6 +64,22 @@
 				<version>${mysql.version}</version>
 				<scope>runtime</scope>
 			</dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper</artifactId>
+				<version>${pagehelper.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>tk.mybatis</groupId>
+				<artifactId>mapper-spring-boot-starter</artifactId>
+				<version>${tk.mybatis.mapper}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -82,6 +105,21 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${google.guava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>${javassist.version}</version>
 		</dependency>
 	</dependencies>
 

@@ -1,0 +1,18 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.sword.module.mybatis.MybatisProperties",
+      "name": "sword.ds",
+      "type": "com.sword.module.ds.DataSourceProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.sword.module.mybatis.MybatisProperties",
+      "name": "sword.mybatis.enable",
+      "description": "是否启动组件",
+      "type": "java.lang.Boolean"
+    }
+  ]
+}

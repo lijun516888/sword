@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -34,21 +33,19 @@ public class ShardingJdbcAutoConfig {
         // 数据库
         ShardingRuleConfiguration shardingRuleConfiguration = new ShardingRuleConfiguration();
         shardingRuleConfiguration.setDefaultDataSourceName("ds_0");
-        ShardingStrategyConfiguration shardingStrategyConfiguration = new InlineShardingStrategyConfiguration("user_id","ds_${user_id % 2}");
+        ShardingStrategyConfiguration shardingStrategyConfiguration = new InlineShardingStrategyConfiguration("tid","ds_0");
         // 数据库表
         TableRuleConfiguration tableRuleConfiguration1 = new TableRuleConfiguration();
-        tableRuleConfiguration1.setActualDataNodes("ds_${0..1}.t_order_${0..1}");
+        tableRuleConfiguration1.setActualDataNodes("ds_0.t_order_${0..1}");
 
-        ShardingStrategyConfiguration var1 = new InlineShardingStrategyConfiguration("order_id",
-                "t_order_${order_id % 2}");
+        ShardingStrategyConfiguration var1 = new InlineShardingStrategyConfiguration("tid",
+                "t_order_${tid % 2}");
         tableRuleConfiguration1.setTableShardingStrategyConfig(var1);
-        tableRuleConfiguration1.setKeyGeneratorColumnName("order_id");
+        tableRuleConfiguration1.setKeyGeneratorColumnName("id");
+        tableRuleConfiguration1.setLogicTable("t_order");
 
-        TableRuleConfiguration tableRuleConfiguration2 = new TableRuleConfiguration();
-        tableRuleConfiguration2.setActualDataNodes("ds_${0..1}.t_order_item_${0..1}");
         List<TableRuleConfiguration> tableRuleConfigurations = Lists.newArrayList();
         tableRuleConfigurations.add(tableRuleConfiguration1);
-        tableRuleConfigurations.add(tableRuleConfiguration2);
         // 配置分表
         shardingRuleConfiguration.setTableRuleConfigs(tableRuleConfigurations);
         // 配置分库

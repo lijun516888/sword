@@ -1,6 +1,5 @@
 package com.sword.module.sj;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.sword.module.ds.DataSourceAutoConfig;
 import io.shardingsphere.core.api.ShardingDataSourceFactory;
@@ -15,11 +14,11 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Configuration
@@ -28,26 +27,23 @@ import java.util.Properties;
 @ConditionalOnProperty(value = "sword.sj.enable", matchIfMissing = true)
 public class ShardingJdbcAutoConfig {
 
+    @Resource
+    private ShardingJdbcProperties shardingJdbcProperties;
+
     @Bean
     public ShardingRuleConfiguration shardingRuleConfiguration() {
         // 数据库
         ShardingRuleConfiguration shardingRuleConfiguration = new ShardingRuleConfiguration();
-        shardingRuleConfiguration.setDefaultDataSourceName("ds_0");
-        ShardingStrategyConfiguration shardingStrategyConfiguration = new InlineShardingStrategyConfiguration("tid","ds_0");
-        // 数据库表
-        TableRuleConfiguration tableRuleConfiguration1 = new TableRuleConfiguration();
-        tableRuleConfiguration1.setActualDataNodes("ds_0.t_order_${0..1}");
-
-        ShardingStrategyConfiguration var1 = new InlineShardingStrategyConfiguration("tid",
-                "t_order_${tid % 2}");
-        tableRuleConfiguration1.setTableShardingStrategyConfig(var1);
-        tableRuleConfiguration1.setKeyGeneratorColumnName("id");
-        tableRuleConfiguration1.setLogicTable("t_order");
-
-        List<TableRuleConfiguration> tableRuleConfigurations = Lists.newArrayList();
-        tableRuleConfigurations.add(tableRuleConfiguration1);
-        // 配置分表
-        shardingRuleConfiguration.setTableRuleConfigs(tableRuleConfigurations);
+        shardingRuleConfiguration.setDefaultDataSourceName(shardingJdbcProperties.getDefaultDataSourceName());
+        ShardingStrategyConfiguration shardingStrategyConfiguration = new InlineShardingStrategyConfiguration(
+                shardingJdbcProperties.getShardingColumName(),
+                shardingJdbcProperties.getDefaultDataSourceName());
+        if(!Objects.isNull(shardingJdbcProperties.getShardingTables())) {
+            List<TableRuleConfiguration> tableRuleConfigurations = Arrays.stream(shardingJdbcProperties.getShardingTables())
+                    .map(this::createTableRuleCfg).collect(Collectors.toList());
+            // 配置分表
+            shardingRuleConfiguration.setTableRuleConfigs(tableRuleConfigurations);
+        }
         // 配置分库
         shardingRuleConfiguration.setDefaultDatabaseShardingStrategyConfig(shardingStrategyConfiguration);
         return shardingRuleConfiguration;
@@ -56,7 +52,7 @@ public class ShardingJdbcAutoConfig {
     @Bean
     public DataSource sjDataSource(DataSource dataSource, ShardingRuleConfiguration shardingRuleConfiguration) {
         Map<String, DataSource> dataSourceMap = Maps.newHashMap();
-        dataSourceMap.put("ds_0", dataSource);
+        dataSourceMap.put(shardingJdbcProperties.getDefaultDataSourceName(), dataSource);
         Map<String, Object> configMap = Maps.newHashMap();
         Properties properties = new Properties();
         try {
@@ -66,4 +62,21 @@ public class ShardingJdbcAutoConfig {
         }
         return dataSource;
     }
+
+    public TableRuleConfiguration createTableRuleCfg(String table) {
+        // 数据库表
+        TableRuleConfiguration tableRuleConfiguration = new TableRuleConfiguration();
+        StringBuffer actualDataNodes = new StringBuffer().append(shardingJdbcProperties.getDefaultDataSourceName())
+                .append(".").append(table).append("_${0..1}");
+        StringBuffer algorithmExpression = new StringBuffer().append(table).append("_${")
+                .append(shardingJdbcProperties.getShardingColumName()).append("}");
+        tableRuleConfiguration.setActualDataNodes(actualDataNodes.toString());
+        ShardingStrategyConfiguration var1 = new InlineShardingStrategyConfiguration(shardingJdbcProperties.getShardingColumName(),
+                algorithmExpression.toString());
+        tableRuleConfiguration.setTableShardingStrategyConfig(var1);
+        tableRuleConfiguration.setKeyGeneratorColumnName(shardingJdbcProperties.getGeneratorColumnName());
+        tableRuleConfiguration.setLogicTable(table);
+        return tableRuleConfiguration;
+    }
+
 }

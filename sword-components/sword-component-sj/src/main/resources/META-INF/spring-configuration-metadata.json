@@ -13,6 +13,36 @@
       "name": "sword.sj.enable",
       "description": "是否启动组件",
       "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.sword.module.sj.ShardingJdbcProperties",
+      "name": "sword.sj.sharding-tables",
+      "description": "需要进行分版的物理表名数组",
+      "type": "java.lang.String[]"
+    },
+    {
+      "sourceType": "com.sword.module.sj.ShardingJdbcProperties",
+      "name": "sword.sj.data-source-names",
+      "description": "数据源名数组",
+      "type": "java.lang.String[]"
+    },
+    {
+      "sourceType": "com.sword.module.sj.ShardingJdbcProperties",
+      "name": "sword.sj.default-data-source-name",
+      "description": "默认数据源名",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sword.module.sj.ShardingJdbcProperties",
+      "name": "sword.sj.sharding-colum-name",
+      "description": "数据库/表分片字段",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sword.module.sj.ShardingJdbcProperties",
+      "name": "sword.sj.generator-column-name",
+      "description": "主键字段默认ID",
+      "type": "java.lang.String"
     }
   ]
 }

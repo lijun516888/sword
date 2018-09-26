@@ -32,9 +32,11 @@ public class SwordController {
         Map<String, Object> map = Maps.newHashMap();
         List<UserDomain> userDomains = userService.list(map);
         result.setEntity(userDomains.get(0));
-
-        Optional<OrderDomain> domain = Optional.ofNullable(orderMapper.get(251478030793310205L));
+        Optional<OrderDomain> domain = Optional.ofNullable(orderMapper.get(251478030793310209L));
         System.out.println(domain.isPresent());
+        if(domain.isPresent()) {
+            System.out.println(domain.get().toString());
+        }
         return result;
     }
 

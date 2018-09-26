@@ -12,4 +12,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class ShardingJdbcProperties {
 
     private boolean eanble = true;
+    private String[] shardingTables;
+    private String[] dataSourceNames;
+    private String defaultDataSourceName;
+    private String shardingColumName;
+    private String generatorColumnName="ID";
 }

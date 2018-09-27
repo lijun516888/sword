@@ -10,6 +10,6 @@ public class MyPreciseShardingAlgorithm implements PreciseShardingAlgorithm {
     @Override
     public String doSharding(Collection collection, PreciseShardingValue preciseShardingValue) {
         System.out.println("===================");
-        return null;
+        return preciseShardingValue.getLogicTableName()+"_"+preciseShardingValue.getValue();
     }
 }

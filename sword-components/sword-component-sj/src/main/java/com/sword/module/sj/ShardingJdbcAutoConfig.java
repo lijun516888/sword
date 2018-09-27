@@ -7,6 +7,7 @@ import io.shardingsphere.core.api.config.ShardingRuleConfiguration;
 import io.shardingsphere.core.api.config.TableRuleConfiguration;
 import io.shardingsphere.core.api.config.strategy.InlineShardingStrategyConfiguration;
 import io.shardingsphere.core.api.config.strategy.ShardingStrategyConfiguration;
+import io.shardingsphere.core.api.config.strategy.StandardShardingStrategyConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -31,8 +32,7 @@ public class ShardingJdbcAutoConfig {
     private ShardingJdbcProperties shardingJdbcProperties;
 
     @Bean
-    public ShardingRuleConfiguration shardingRuleConfiguration() {
-        // 数据库
+    public ShardingRuleConfiguration shardingRuleConfiguration(MyPreciseShardingAlgorithm myPreciseShardingAlgorithm) {
         ShardingRuleConfiguration shardingRuleConfiguration = new ShardingRuleConfiguration();
         shardingRuleConfiguration.setDefaultDataSourceName(shardingJdbcProperties.getDefaultDataSourceName());
         ShardingStrategyConfiguration shardingStrategyConfiguration = new InlineShardingStrategyConfiguration(
@@ -41,12 +41,18 @@ public class ShardingJdbcAutoConfig {
         if(!Objects.isNull(shardingJdbcProperties.getShardingTables())) {
             List<TableRuleConfiguration> tableRuleConfigurations = Arrays.stream(shardingJdbcProperties.getShardingTables())
                     .map(this::createTableRuleCfg).collect(Collectors.toList());
-            // 配置分表
             shardingRuleConfiguration.setTableRuleConfigs(tableRuleConfigurations);
         }
-        // 配置分库
+        ShardingStrategyConfiguration var1 = new StandardShardingStrategyConfiguration(shardingJdbcProperties.getShardingColumName(),
+                myPreciseShardingAlgorithm);
+        shardingRuleConfiguration.setDefaultTableShardingStrategyConfig(var1);
         shardingRuleConfiguration.setDefaultDatabaseShardingStrategyConfig(shardingStrategyConfiguration);
         return shardingRuleConfiguration;
+    }
+
+    @Bean
+    public MyPreciseShardingAlgorithm myPreciseShardingAlgorithm() {
+        return new MyPreciseShardingAlgorithm();
     }
 
     @Bean

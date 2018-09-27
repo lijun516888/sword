@@ -46,7 +46,12 @@ public abstract class EntityServiceImpl<T, M extends EntityMybatisDao<T>> implem
 
     @Override
     public T get(Serializable id) {
-        return null;
+        return this.getEntityDao().get(id);
+    }
+
+    @Override
+    public T getTid(Serializable id, Long tid) {
+        return this.getEntityDao().getTid(id, tid);
     }
 
     @Override

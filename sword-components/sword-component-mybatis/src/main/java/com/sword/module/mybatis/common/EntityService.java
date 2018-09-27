@@ -8,7 +8,9 @@ import java.util.Map;
 
 public interface EntityService<T> {
 
-    T get(Serializable id) throws Exception;
+    T get(Serializable id);
+
+    T getTid(Serializable id, Long tid);
 
     List<T> list(Map<String, Object> map);
 

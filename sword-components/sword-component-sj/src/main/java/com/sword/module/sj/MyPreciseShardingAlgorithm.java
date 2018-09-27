@@ -1,15 +1,18 @@
 package com.sword.module.sj;
 
-import io.shardingsphere.core.api.algorithm.sharding.PreciseShardingValue;
-import io.shardingsphere.core.api.algorithm.sharding.standard.PreciseShardingAlgorithm;
+import io.shardingsphere.core.api.algorithm.sharding.ListShardingValue;
+import io.shardingsphere.core.api.algorithm.sharding.ShardingValue;
+import io.shardingsphere.core.api.algorithm.sharding.complex.ComplexKeysShardingAlgorithm;
 
+import java.util.Arrays;
 import java.util.Collection;
 
-public class MyPreciseShardingAlgorithm implements PreciseShardingAlgorithm {
+public class MyPreciseShardingAlgorithm implements ComplexKeysShardingAlgorithm {
 
     @Override
-    public String doSharding(Collection collection, PreciseShardingValue preciseShardingValue) {
+    public Collection<String> doSharding(Collection<String> collection, Collection<ShardingValue> collection1) {
         System.out.println("===================");
-        return preciseShardingValue.getLogicTableName()+"_"+preciseShardingValue.getValue();
+        ShardingValue shardingValue = collection1.iterator().next();
+        return Arrays.asList(shardingValue.getLogicTableName() + "_" + (((ListShardingValue) shardingValue).getValues().iterator().next()));
     }
 }

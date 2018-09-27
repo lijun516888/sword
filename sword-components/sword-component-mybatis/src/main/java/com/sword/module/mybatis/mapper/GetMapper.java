@@ -20,6 +20,12 @@ public interface GetMapper<T> {
             type = GetMapper.GetProvider.class,
             method = "dynamicSQL"
     )
+    T getTid(Serializable id, Long tid);
+
+    @SelectProvider(
+            type = GetMapper.GetProvider.class,
+            method = "dynamicSQL"
+    )
     List<T> getAll();
 
     class GetProvider extends BaseSelectProvider {
@@ -28,6 +34,9 @@ public interface GetMapper<T> {
             super(mapperClass, mapperHelper);
         }
         public String get(MappedStatement ms) {
+            return super.selectByPrimaryKey(ms);
+        }
+        public String getTid(MappedStatement ms) {
             return super.selectByPrimaryKey(ms);
         }
         public String getAll(MappedStatement ms) {

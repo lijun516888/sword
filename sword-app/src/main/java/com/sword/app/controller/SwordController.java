@@ -6,6 +6,7 @@ import com.sword.app.domain.UserDomain;
 import com.sword.app.mapper.OrderMapper;
 import com.sword.app.service.UserService;
 import com.sword.core.dto.JsonEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,8 @@ public class SwordController {
     @Resource
     private OrderMapper orderMapper;
 
-    @Resource
-    private DataSource dataSource;
+    @Autowired
+    private DataSource sjDataSource;
 
     @ResponseBody
     @RequestMapping(value = "user")
@@ -38,20 +39,20 @@ public class SwordController {
         List<UserDomain> userDomains = userService.list(map);
         result.setEntity(userDomains.get(0));
 
-        OrderDomain var = new OrderDomain();
+        /*OrderDomain var = new OrderDomain();
         var.setName("B");
         var.setTid(1);
-        orderMapper.create(var);
+        orderMapper.create(var);*/
 
-        Optional<OrderDomain> domain = Optional.ofNullable(orderMapper.get(251478030793310210L));
+        Optional<OrderDomain> domain = Optional.ofNullable(orderMapper.getTid(251478030793310210L, 0L));
         System.out.println(domain.isPresent());
         if(domain.isPresent()) {
             System.out.println(domain.get().toString());
         }
 
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        List<Map<String, Object>> mapList = jdbcTemplate.queryForList("select * from t_order_1 where id = " +
-                "'251478030793310210'");
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(sjDataSource);
+        List<Map<String, Object>> mapList = jdbcTemplate.queryForList("select * from t_order where " +
+                "id = '251478030793310210' AND tid = 0");
 
         return result;
     }

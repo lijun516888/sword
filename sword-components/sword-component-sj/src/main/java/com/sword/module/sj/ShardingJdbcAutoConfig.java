@@ -5,6 +5,7 @@ import com.sword.module.ds.DataSourceAutoConfig;
 import io.shardingsphere.core.api.ShardingDataSourceFactory;
 import io.shardingsphere.core.api.config.ShardingRuleConfiguration;
 import io.shardingsphere.core.api.config.TableRuleConfiguration;
+import io.shardingsphere.core.api.config.strategy.ComplexShardingStrategyConfiguration;
 import io.shardingsphere.core.api.config.strategy.InlineShardingStrategyConfiguration;
 import io.shardingsphere.core.api.config.strategy.ShardingStrategyConfiguration;
 import io.shardingsphere.core.api.config.strategy.StandardShardingStrategyConfiguration;
@@ -41,9 +42,9 @@ public class ShardingJdbcAutoConfig {
         if(!Objects.isNull(shardingJdbcProperties.getShardingTables())) {
             List<TableRuleConfiguration> tableRuleConfigurations = Arrays.stream(shardingJdbcProperties.getShardingTables())
                     .map(this::createTableRuleCfg).collect(Collectors.toList());
-            shardingRuleConfiguration.setTableRuleConfigs(tableRuleConfigurations);
+            // shardingRuleConfiguration.setTableRuleConfigs(tableRuleConfigurations);
         }
-        ShardingStrategyConfiguration var1 = new StandardShardingStrategyConfiguration(shardingJdbcProperties.getShardingColumName(),
+        ShardingStrategyConfiguration var1 = new ComplexShardingStrategyConfiguration("tid",
                 myPreciseShardingAlgorithm);
         shardingRuleConfiguration.setDefaultTableShardingStrategyConfig(var1);
         shardingRuleConfiguration.setDefaultDatabaseShardingStrategyConfig(shardingStrategyConfiguration);

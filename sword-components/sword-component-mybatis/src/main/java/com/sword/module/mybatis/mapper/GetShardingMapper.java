@@ -9,22 +9,16 @@ import tk.mybatis.mapper.provider.base.BaseSelectProvider;
 import java.io.Serializable;
 import java.util.List;
 
-public interface GetMapper<T> {
+public interface GetShardingMapper<T> {
 
     @SelectProvider(
-            type = GetMapper.GetProvider.class,
+            type = GetShardingMapper.GetProvider.class,
             method = "dynamicSQL"
     )
-    T get(Serializable id);
+    T get(@Param("id") Serializable id, @Param("tid") Serializable tid);
 
     @SelectProvider(
-            type = GetMapper.GetProvider.class,
-            method = "dynamicSQL"
-    )
-    T getSharding(@Param("id") Serializable id, @Param("tid")  Serializable tid);
-
-    @SelectProvider(
-            type = GetMapper.GetProvider.class,
+            type = GetShardingMapper.GetProvider.class,
             method = "dynamicSQL"
     )
     List<T> getAll();
@@ -35,9 +29,6 @@ public interface GetMapper<T> {
             super(mapperClass, mapperHelper);
         }
         public String get(MappedStatement ms) {
-            return super.selectByPrimaryKey(ms);
-        }
-        public String getSharding(MappedStatement ms) {
             return super.selectByPrimaryKey(ms);
         }
         public String getAll(MappedStatement ms) {

@@ -19,6 +19,6 @@ public class OrderDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Id
-    private Integer tid;
+    private Long tid;
     private String name;
 }

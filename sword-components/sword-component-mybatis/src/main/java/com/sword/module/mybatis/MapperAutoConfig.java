@@ -1,7 +1,8 @@
 package com.sword.module.mybatis;
 
 import com.github.pagehelper.autoconfigure.MapperProperties;
-import com.sword.module.mybatis.common.EntityMybatisDao;
+import com.sword.module.mybatis.common.sharding.EntityMybatisShardingDao;
+import com.sword.module.mybatis.common.simple.EntityMybatisDao;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -43,7 +44,7 @@ public class MapperAutoConfig {
      */
     @PostConstruct
     public void addPageInterceptor() {
-        mapperProperties.setMappers(Arrays.asList(EntityMybatisDao.class));
+        mapperProperties.setMappers(Arrays.asList(EntityMybatisDao.class, EntityMybatisShardingDao.class));
         MapperHelper mapperHelper = new MapperHelper();
         mapperHelper.setConfig(this.mapperProperties);
         Iterator var2;

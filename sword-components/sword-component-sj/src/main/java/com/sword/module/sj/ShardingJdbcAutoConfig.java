@@ -8,7 +8,6 @@ import io.shardingsphere.core.api.config.TableRuleConfiguration;
 import io.shardingsphere.core.api.config.strategy.ComplexShardingStrategyConfiguration;
 import io.shardingsphere.core.api.config.strategy.InlineShardingStrategyConfiguration;
 import io.shardingsphere.core.api.config.strategy.ShardingStrategyConfiguration;
-import io.shardingsphere.core.api.config.strategy.StandardShardingStrategyConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -42,7 +41,7 @@ public class ShardingJdbcAutoConfig {
         if(!Objects.isNull(shardingJdbcProperties.getShardingTables())) {
             List<TableRuleConfiguration> tableRuleConfigurations = Arrays.stream(shardingJdbcProperties.getShardingTables())
                     .map(this::createTableRuleCfg).collect(Collectors.toList());
-            // shardingRuleConfiguration.setTableRuleConfigs(tableRuleConfigurations);
+            shardingRuleConfiguration.setTableRuleConfigs(tableRuleConfigurations);
         }
         ShardingStrategyConfiguration var1 = new ComplexShardingStrategyConfiguration("tid",
                 myPreciseShardingAlgorithm);

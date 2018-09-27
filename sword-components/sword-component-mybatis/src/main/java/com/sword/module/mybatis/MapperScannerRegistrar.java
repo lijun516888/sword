@@ -1,6 +1,6 @@
 package com.sword.module.mybatis;
 
-import com.sword.module.mybatis.common.EntityMybatisDao;
+import com.sword.module.mybatis.common.EntityDao;
 import org.mybatis.spring.mapper.ClassPathMapperScanner;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
@@ -26,7 +26,7 @@ public class MapperScannerRegistrar implements BeanFactoryAware, ImportBeanDefin
             if (this.resourceLoader != null) {
                 scanner.setResourceLoader(this.resourceLoader);
             }
-            scanner.setMarkerInterface(EntityMybatisDao.class);
+            scanner.setMarkerInterface(EntityDao.class);
             scanner.registerFilters();
             List<String> daoScanPackages = Arrays.asList("com.**.mapper");
             scanner.doScan((String[]) daoScanPackages.toArray(new String[daoScanPackages.size()]));

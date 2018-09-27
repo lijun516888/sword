@@ -1,4 +1,4 @@
-package com.sword.module.mybatis.common;
+package com.sword.module.mybatis.common.sharding;
 
 import com.sword.core.dto.PageInfo;
 import com.sword.core.utils.GenericsUtils;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Transactional
-public abstract class EntityServiceImpl<T, M extends EntityMybatisDao<T>> implements ApplicationContextAware, EntityService<T> {
+public abstract class EntityServiceShardingImpl<T, M extends EntityMybatisShardingDao<T>> implements ApplicationContextAware, EntityShardingService<T> {
 
     private M entityDao;
 
@@ -45,13 +45,13 @@ public abstract class EntityServiceImpl<T, M extends EntityMybatisDao<T>> implem
     }
 
     @Override
-    public T get(Serializable id) {
-        return this.getEntityDao().get(id);
+    public void save(T domain) {
+        this.getEntityDao().create(domain);
     }
 
     @Override
-    public T getTid(Serializable id, Long tid) {
-        return this.getEntityDao().getTid(id, tid);
+    public T get(Serializable id, Serializable tid) {
+        return this.getEntityDao().get(id, tid);
     }
 
     @Override

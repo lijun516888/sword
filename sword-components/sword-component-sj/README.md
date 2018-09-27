@@ -1,4 +1,5 @@
 # https://github.com/sharding-sphere/sharding-sphere
+# http://shardingsphere.io/document/current/cn/features/sharding/concept/sql/
 
 ## sharding config
 ## sword.sj.data-source-names[0]=ds_0

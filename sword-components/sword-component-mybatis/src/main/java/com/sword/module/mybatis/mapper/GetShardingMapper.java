@@ -7,7 +7,6 @@ import tk.mybatis.mapper.mapperhelper.MapperHelper;
 import tk.mybatis.mapper.provider.base.BaseSelectProvider;
 
 import java.io.Serializable;
-import java.util.List;
 
 public interface GetShardingMapper<T> {
 
@@ -17,22 +16,13 @@ public interface GetShardingMapper<T> {
     )
     T get(@Param("id") Serializable id, @Param("tid") Serializable tid);
 
-    @SelectProvider(
-            type = GetShardingMapper.GetProvider.class,
-            method = "dynamicSQL"
-    )
-    List<T> getAll();
-
     class GetProvider extends BaseSelectProvider {
-
         public GetProvider(Class<?> mapperClass, MapperHelper mapperHelper) {
             super(mapperClass, mapperHelper);
         }
         public String get(MappedStatement ms) {
             return super.selectByPrimaryKey(ms);
         }
-        public String getAll(MappedStatement ms) {
-            return super.selectAll(ms);
-        }
+
     }
 }

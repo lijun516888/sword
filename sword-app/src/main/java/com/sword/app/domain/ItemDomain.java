@@ -10,8 +10,8 @@ import javax.persistence.Table;
 @Setter
 @Getter
 @ToString
-@Table(name = "t_order")
-public class OrderDomain extends ShardingBaseDomain {
+@Table(name = "t_item")
+public class ItemDomain extends ShardingBaseDomain {
 
     private String name;
 }

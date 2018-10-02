@@ -1,66 +1,70 @@
 package com.sword.module.mybatis.common.sharding;
 
 import com.sword.core.dto.PageInfo;
-import com.sword.core.utils.GenericsUtils;
-import com.sword.core.utils.bean.BeanUtils;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import com.sword.module.mybatis.common.BaseEntityService;
+import com.sword.module.mybatis.common.domain.BaseDomain;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 
 @Transactional
-public abstract class EntityServiceShardingImpl<T, M extends EntityMybatisShardingDao<T>> implements ApplicationContextAware, EntityShardingService<T> {
+public abstract class EntityServiceShardingImpl<T, M extends EntityMybatisShardingDao<T>> extends BaseEntityService<M> implements EntityShardingService<T> {
 
-    private M entityDao;
-
-    private ApplicationContext context;
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.context = applicationContext;
-    }
-
-    protected M getEntityDao() {
-        if(this.entityDao != null) {
-            return this.entityDao;
-        } else {
-            Class<M> daoType = GenericsUtils.getSuperClassGenricType(this.getClass(), 1);
-            List fields = BeanUtils.getFieldsByType(this, daoType);
-            try {
-                if (fields != null && fields.size() > 0) {
-                    this.entityDao = (M) BeanUtils.getDeclaredProperty(this, ((Field)fields.get(0)).getName());
-                } else {
-                    this.entityDao = (M) this.context.getBean(daoType);
-                }
-            } catch (Exception var4) {
-                throw new RuntimeException(var4);
-            }
-            return this.entityDao;
-        }
-    }
-
-    @Override
-    public void save(T domain) {
-        this.getEntityDao().create(domain);
-    }
-
-    @Override
-    public T get(Serializable id, Serializable tid) {
+    public T get(Serializable id, Serializable tid) throws Exception {
         return this.getEntityDao().get(id, tid);
     }
 
-    @Override
-    public PageInfo<T> query(PageInfo<T> pageInfo, Map<String, Object> map) {
-        return this.getEntityDao().query(pageInfo, map, null);
+    public List<T> getAll(Long tid) throws Exception {
+        return this.getEntityDao().getShardingAll("EQ_tid", tid);
     }
 
-    @Override
-    public List<T> list(Map<String, Object> map) {
-        return this.getEntityDao().list(map, null);
+    public void remove(T o) throws Exception {
+        this.getEntityDao().remove(o);
     }
+
+    public void removeById(Serializable id, Serializable tid) throws Exception {
+        this.getEntityDao().removeShardingById(id, tid);
+    }
+
+    public void removes(Serializable tid, Serializable... ids) throws Exception {
+        this.getEntityDao().removesSharding(tid, ids);
+    }
+
+    public void save(T o) throws Exception {
+        this.getEntityDao().create(o);
+    }
+
+    public void update(T o) throws Exception {
+        this.getEntityDao().update(o);
+    }
+
+    public void saveOrUpdate(T t) throws Exception {
+        if (t instanceof BaseDomain) {
+            if (((BaseDomain)t).getId() != null) {
+                this.getEntityDao().update(t);
+            } else {
+                this.getEntityDao().create(t);
+            }
+
+        } else {
+            throw new UnsupportedOperationException("实体类必须继承BaseDomain才能使用saveOrUpdate方法");
+        }
+    }
+
+    public PageInfo<T> query(Serializable tid, PageInfo<T> pageInfo, Map<String, Object> map, Map<String, Boolean> orderMap) throws Exception {
+        map.put("EQ_tid", tid);
+        return this.getEntityDao().query(pageInfo, map, orderMap);
+    }
+
+    public PageInfo<T> query(Serializable tid, PageInfo<T> pageInfo, Map<String, Object> map) throws Exception {
+        return this.query(tid, pageInfo, map, (Map)null);
+    }
+
+    public List<T> query(Serializable tid, Map<String, Object> map, Map<String, Boolean> sortMap) {
+        map.put("EQ_tid", tid);
+        return this.getEntityDao().list(map, sortMap);
+    }
+
 }

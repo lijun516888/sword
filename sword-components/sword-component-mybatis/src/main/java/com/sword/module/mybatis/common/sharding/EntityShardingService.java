@@ -8,12 +8,24 @@ import java.util.Map;
 
 public interface EntityShardingService<T> {
 
-    void save(T domain);
+    T get(Serializable id, Serializable tid) throws Exception;
 
-    T get(Serializable id, Serializable tid);
+    List<T> getAll(Long tid) throws Exception;
 
-    List<T> list(Map<String, Object> map);
+    void save(T t) throws Exception;
 
-    PageInfo<T> query(PageInfo<T> pageInfo, Map<String, Object> map);
+    void update(T t) throws Exception;
+
+    void remove(T t) throws Exception;
+
+    void removeById(Serializable id, Serializable tid) throws Exception;
+
+    void removes(Serializable tid, Serializable... ids) throws Exception;
+
+    PageInfo<T> query(Serializable tid, PageInfo<T> pageInfo, Map<String, Object> map, Map<String, Boolean> sortMap) throws Exception;
+
+    PageInfo<T> query(Serializable tid, PageInfo<T> pageInfo, Map<String, Object> map) throws Exception;
+
+    List<T> query(Serializable tid, Map<String, Object> map, Map<String, Boolean> sortMap);
 
 }

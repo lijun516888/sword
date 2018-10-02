@@ -8,6 +8,7 @@ import io.shardingsphere.core.api.config.TableRuleConfiguration;
 import io.shardingsphere.core.api.config.strategy.ComplexShardingStrategyConfiguration;
 import io.shardingsphere.core.api.config.strategy.InlineShardingStrategyConfiguration;
 import io.shardingsphere.core.api.config.strategy.ShardingStrategyConfiguration;
+import io.shardingsphere.core.keygen.DefaultKeyGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -32,7 +33,7 @@ public class ShardingJdbcAutoConfig {
     private ShardingJdbcProperties shardingJdbcProperties;
 
     @Bean
-    public ShardingRuleConfiguration shardingRuleConfiguration(MyPreciseShardingAlgorithm myPreciseShardingAlgorithm) {
+    public ShardingRuleConfiguration shardingRuleConfiguration(CustomComplexKeysShardingAlgorithm myPreciseShardingAlgorithm) {
         ShardingRuleConfiguration shardingRuleConfiguration = new ShardingRuleConfiguration();
         shardingRuleConfiguration.setDefaultDataSourceName(shardingJdbcProperties.getDefaultDataSourceName());
         ShardingStrategyConfiguration shardingStrategyConfiguration = new InlineShardingStrategyConfiguration(
@@ -43,7 +44,7 @@ public class ShardingJdbcAutoConfig {
                     .map(this::createTableRuleCfg).collect(Collectors.toList());
             shardingRuleConfiguration.setTableRuleConfigs(tableRuleConfigurations);
         }
-        ShardingStrategyConfiguration var1 = new ComplexShardingStrategyConfiguration("tid",
+        ShardingStrategyConfiguration var1 = new ComplexShardingStrategyConfiguration(shardingJdbcProperties.getShardingColumName(),
                 myPreciseShardingAlgorithm);
         shardingRuleConfiguration.setDefaultTableShardingStrategyConfig(var1);
         shardingRuleConfiguration.setDefaultDatabaseShardingStrategyConfig(shardingStrategyConfiguration);
@@ -51,8 +52,8 @@ public class ShardingJdbcAutoConfig {
     }
 
     @Bean
-    public MyPreciseShardingAlgorithm myPreciseShardingAlgorithm() {
-        return new MyPreciseShardingAlgorithm();
+    public CustomComplexKeysShardingAlgorithm myPreciseShardingAlgorithm() {
+        return new CustomComplexKeysShardingAlgorithm();
     }
 
     @Bean
@@ -80,6 +81,7 @@ public class ShardingJdbcAutoConfig {
         ShardingStrategyConfiguration var1 = new InlineShardingStrategyConfiguration(shardingJdbcProperties.getShardingColumName(),
                 algorithmExpression.toString());
         tableRuleConfiguration.setTableShardingStrategyConfig(var1);
+        tableRuleConfiguration.setKeyGenerator(new DefaultKeyGenerator());
         tableRuleConfiguration.setKeyGeneratorColumnName(shardingJdbcProperties.getGeneratorColumnName());
         tableRuleConfiguration.setLogicTable(table);
         return tableRuleConfiguration;

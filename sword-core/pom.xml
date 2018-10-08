@@ -15,4 +15,17 @@
 	<name>sword-core</name>
 	<description>Demo project for Spring Boot</description>
 
+	<dependencies>
+		<!-- json -->
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<classifier>jdk15</classifier>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+		</dependency>
+	</dependencies>
+
 </project>

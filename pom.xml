@@ -38,6 +38,8 @@
 
 		<shardingjdbc.core.version>2.0.3</shardingjdbc.core.version>
 		<sharding-sphere.version>3.0.0.M3</sharding-sphere.version>
+		<json-lib.version>2.3</json-lib.version>
+		<dom4j.version>1.6.1</dom4j.version>
 	</properties>
 
 	<dependencyManagement>
@@ -117,6 +119,17 @@
 				<artifactId>sharding-jdbc-spring-boot-starter</artifactId>
 				<version>${sharding-sphere.version}</version>
 			</dependency>-->
+			<dependency>
+				<groupId>net.sf.json-lib</groupId>
+				<artifactId>json-lib</artifactId>
+				<version>${json-lib.version}</version>
+				<classifier>jdk15</classifier>
+			</dependency>
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>${dom4j.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

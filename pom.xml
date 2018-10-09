@@ -40,6 +40,7 @@
 		<sharding-sphere.version>3.0.0.M3</sharding-sphere.version>
 		<json-lib.version>2.3</json-lib.version>
 		<dom4j.version>1.6.1</dom4j.version>
+		<netty-all.version>4.1.12.Final</netty-all.version>
 	</properties>
 
 	<dependencyManagement>
@@ -71,7 +72,6 @@
 				<version>${mysql.version}</version>
 				<scope>runtime</scope>
 			</dependency>
-
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -114,11 +114,6 @@
 				<artifactId>sharding-jdbc</artifactId>
 				<version>${sharding-sphere.version}</version>
 			</dependency>
-			<!--<dependency>
-				<groupId>io.shardingsphere</groupId>
-				<artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-				<version>${sharding-sphere.version}</version>
-			</dependency>-->
 			<dependency>
 				<groupId>net.sf.json-lib</groupId>
 				<artifactId>json-lib</artifactId>
@@ -129,6 +124,12 @@
 				<groupId>dom4j</groupId>
 				<artifactId>dom4j</artifactId>
 				<version>${dom4j.version}</version>
+			</dependency>
+			<!-- Netty4.1.12 -->
+			<dependency>
+				<groupId>io.netty</groupId>
+				<artifactId>netty-all</artifactId>
+				<version>${netty-all.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

@@ -33,6 +33,7 @@ public class MybatisAutoConfig {
         return interceptors;
     }
 
+    @ConditionalOnBean(DataSource.class)
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource sjDataSource, Interceptor[] interceptors) {
         SqlSessionFactoryBean factory = new SqlSessionFactoryBean();

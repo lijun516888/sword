@@ -41,6 +41,8 @@
 		<json-lib.version>2.3</json-lib.version>
 		<dom4j.version>1.6.1</dom4j.version>
 		<netty-all.version>4.1.12.Final</netty-all.version>
+
+		<spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
 	</properties>
 
 	<dependencyManagement>
@@ -132,6 +134,16 @@
 				<artifactId>netty-all</artifactId>
 				<version>${netty-all.version}</version>
 			</dependency>
+
+            <!-- spring cloud -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 

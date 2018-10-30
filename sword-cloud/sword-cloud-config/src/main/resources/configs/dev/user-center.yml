@@ -1,0 +1,5 @@
+logging:
+  level:
+    root: info
+    com.sword: debug
+  file: logs/${spring.application.name}.log

@@ -10,6 +10,12 @@ spring:
       server:
         native:
           search-locations: classpath:/configs/{profile}
+          #searchLocations: file:/d:/configs/{profile}
+        git:
+          uri: https://github.com/lijun516888/sword/tree/master/sword-cloud/sword-cloud-config/src/main/resources
+          default-label: master
+          force-pull: true
+          searchPaths: '{profile}'
 eureka:
   client:
     service-url:

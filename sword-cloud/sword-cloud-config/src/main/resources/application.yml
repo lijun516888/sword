@@ -4,7 +4,7 @@ spring:
   application:
     name: config-center
   profiles:
-    active: native
+    active: dev
   cloud:
     config:
       server:
@@ -12,7 +12,7 @@ spring:
           search-locations: classpath:/configs/{profile}
           #searchLocations: file:/d:/configs/{profile}
         git:
-          uri: https://github.com/lijun516888/sword/tree/master/sword-cloud/sword-cloud-config/src/main/resources
+          uri: https://gitee.com/zhang.w/cloud-service-configs.git
           default-label: master
           force-pull: true
           searchPaths: '{profile}'

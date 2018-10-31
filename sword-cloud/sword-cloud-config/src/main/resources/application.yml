@@ -12,10 +12,11 @@ spring:
           search-locations: classpath:/configs/{profile}
           #searchLocations: file:/d:/configs/{profile}
         git:
-          uri: https://gitee.com/zhang.w/cloud-service-configs.git
+          uri: https://github.com/lijun516888/sword.git
           default-label: master
           force-pull: true
           searchPaths: '{profile}'
+          basedir: sword-cloud/sword-cloud-config/src/main/resources/configs
 eureka:
   client:
     service-url:

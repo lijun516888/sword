@@ -4,23 +4,25 @@ spring:
   application:
     name: config-center
   profiles:
-    active: dev
+    active: native
   cloud:
     config:
       server:
         native:
-          search-locations: classpath:/configs/{profile}
+          search-locations: classpath:/configs/dev
           #searchLocations: file:/d:/configs/{profile}
-        git:
-          uri: https://github.com/lijun516888/sword.git
-          default-label: master
-          force-pull: true
-          searchPaths: '{profile}'
-          basedir: sword-cloud/sword-cloud-config/src/main/resources/configs
+        #git:
+          #uri: https://github.com/spring-cloud-samples/config-repo
+          #default-label: master
+          #force-pull: true
+          #searchPaths: '{profile}'
+          #basedir: sword-cloud/sword-cloud-config/src/main/resources/configs
+          #username: 576260496@qq.com
+          #password: w13132354113
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:6001/eureka/
+      defaultZone: http://127.0.0.1:6001/eureka/
     registry-fetch-interval-seconds: 5
   instance:
     lease-expiration-duration-in-seconds: 15

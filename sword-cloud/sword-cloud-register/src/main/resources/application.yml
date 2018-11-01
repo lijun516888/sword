@@ -1,20 +1,32 @@
-server:
-  port: 6001
 spring:
   application:
     name: register-center
+server:
+  port: 6001
 eureka:
   client:
-    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://127.0.0.1:${server.port}/eureka/
+    register-with-eureka: true
     fetch-registry: false
-    service-url:
-      defaultZone: http://localhost:${server.port}/eureka/
     registry-fetch-interval-seconds: 5
   instance:
-    instance-id: ${spring.application.name}:${server.port}
     lease-expiration-duration-in-seconds: 15
     lease-renewal-interval-in-seconds: 5
     prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
   server:
-    enable-self-preservation: true
+    enable-self-preservation: false
     eviction-interval-timer-in-ms: 3000
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+logging:
+  level:
+    root: info
+  file: logs/${spring.application.name}.log

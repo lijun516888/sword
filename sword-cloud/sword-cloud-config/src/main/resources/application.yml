@@ -1,0 +1,12 @@
+server:
+  port: 3344
+spring:
+  application:
+    name: config-center
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/lijun516888/cloud-config.git
+          username: 576260496@qq.com
+          password: w13132354113

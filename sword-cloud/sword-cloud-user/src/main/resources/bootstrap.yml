@@ -3,5 +3,9 @@ spring:
     config:
       uri: http://localhost:3344
       label: master
-      profile: test
       name: user-center
+      profile: dev
+      #discovery:
+        #enabled: true
+        #service-id: config-center
+      #fail-fast: true

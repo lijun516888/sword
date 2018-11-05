@@ -20,6 +20,8 @@
 	<modules>
 		<module>sword-cloud-config</module>
 		<module>sword-cloud-register</module>
+		<module>sword-cloud-user</module>
+		<module>sword-cloud-auth</module>
 	</modules>
 
 </project>

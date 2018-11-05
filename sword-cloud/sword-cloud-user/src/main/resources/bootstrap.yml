@@ -1,11 +1,25 @@
+server:
+  port: 0
 spring:
   cloud:
     config:
-      uri: http://localhost:3344
-      label: master
+      #uri: http://localhost:3344
+      #label: master
       name: user-center
       profile: dev
-      #discovery:
-        #enabled: true
-        #service-id: config-center
-      #fail-fast: true
+      discovery:
+        enabled: true
+        service-id: config-center
+      fail-fast: true
+  application:
+    name: user-center
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:6001/eureka/
+    registry-fetch-interval-seconds: 5
+  instance:
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.int}

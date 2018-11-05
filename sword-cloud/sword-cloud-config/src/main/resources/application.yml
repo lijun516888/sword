@@ -1,13 +1,20 @@
 server:
-  port: 3344
+  port: 0
 spring:
   application:
     name: config-center
+  profiles:
+    active: git
   cloud:
     config:
       server:
+        native:
+          searchLocations: classpath:/configs/{profile}
         git:
           uri: https://github.com/lijun516888/cloud-config.git
+          default-label: master
+          force-pull: true
+          search-paths: '{profile}'
 eureka:
   client:
     serviceUrl:
@@ -17,4 +24,4 @@ eureka:
     lease-expiration-duration-in-seconds: 15
     lease-renewal-interval-in-seconds: 5
     prefer-ip-address: true
-    instance-id: ${spring.application.name}:${server.port}
+    instance-id: ${spring.application.name}:${random.int}

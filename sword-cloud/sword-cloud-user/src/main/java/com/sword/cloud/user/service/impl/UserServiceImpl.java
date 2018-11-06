@@ -1,6 +1,6 @@
 package com.sword.cloud.user.service.impl;
 
-import com.sword.cloud.user.domain.UserDomain;
+import com.sword.cloud.model.UserDomain;
 import com.sword.cloud.user.service.UserService;
 import org.springframework.stereotype.Service;
 

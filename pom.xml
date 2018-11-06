@@ -111,6 +111,11 @@
 				<artifactId>sword-component-sj</artifactId>
 				<version>${sword.component.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.sword</groupId>
+				<artifactId>sword-cloud-model</artifactId>
+				<version>${sword.component.version}</version>
+			</dependency>
 			<!-- shardingjdbc -->
 			<dependency>
 				<groupId>io.shardingsphere</groupId>

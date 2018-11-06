@@ -22,6 +22,7 @@
 		<module>sword-cloud-register</module>
 		<module>sword-cloud-user</module>
 		<module>sword-cloud-auth</module>
+		<module>sword-cloud-model</module>
 	</modules>
 
 </project>

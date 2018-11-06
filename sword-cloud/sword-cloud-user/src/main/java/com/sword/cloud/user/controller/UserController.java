@@ -1,6 +1,6 @@
 package com.sword.cloud.user.controller;
 
-import com.sword.cloud.user.domain.UserDomain;
+import com.sword.cloud.model.UserDomain;
 import com.sword.cloud.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

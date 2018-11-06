@@ -1,6 +1,6 @@
 package com.sword.cloud.user.service;
 
-import com.sword.cloud.user.domain.UserDomain;
+import com.sword.cloud.model.UserDomain;
 
 public interface UserService {
 

@@ -1,4 +1,4 @@
-package com.sword.cloud.user.domain;
+package com.sword.cloud.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

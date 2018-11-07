@@ -23,6 +23,7 @@
 		<module>sword-cloud-user</module>
 		<module>sword-cloud-auth</module>
 		<module>sword-cloud-model</module>
+		<module>sword-cloud-zuul</module>
 	</modules>
 
 </project>

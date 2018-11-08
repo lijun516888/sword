@@ -1,16 +1,8 @@
 server:
-  port: 0
+  port: 8089
 spring:
-  cloud:
-    config:
-      name: auth-center
-      profile: dev
-      discovery:
-        enabled: true
-        service-id: config-center
-      fail-fast: true
   application:
-    name: auth-center
+    name: zuul-center
   mvc:
     servlet:
       load-on-startup: 1
@@ -23,8 +15,16 @@ eureka:
     lease-expiration-duration-in-seconds: 15
     lease-renewal-interval-in-seconds: 5
     prefer-ip-address: true
-    instance-id: ${spring.application.name}:${random.int}
-ribbon:
-  eager-load:
-    clients: user-center
-    enabled: true
+    instance-id: ${spring.application.name}:${server.port}
+
+zuul:
+  ignored-services: '*'
+  sensitiveHeaders:
+  routes:
+    user:
+      path: /api-u/**
+      service-id: user-center
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
+  add-proxy-headers: true

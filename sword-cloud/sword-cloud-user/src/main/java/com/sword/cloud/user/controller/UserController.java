@@ -14,9 +14,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "users-anon/internal", params = "username")
+    @GetMapping(value = "/users-anon/internal", params = "username")
     public UserDomain findByUsername(String username) {
         return userService.findByUsername(username);
+    }
+
+    @GetMapping(value = "/users/external", params = "age")
+    public UserDomain findByUserage(String age) {
+        System.out.println("=================");
+        return userService.findByUsername(age);
     }
 
 }

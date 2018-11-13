@@ -1,6 +1,6 @@
 package com.sword.cloud.user.service.impl;
 
-import com.sword.cloud.model.UserDomain;
+import com.sword.cloud.model.user.LoginAppUser;
 import com.sword.cloud.user.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -8,11 +8,9 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Override
-    public UserDomain findByUsername(String username) {
-        UserDomain user = new UserDomain();
+    public LoginAppUser findByUsername(String username) {
+        LoginAppUser user = new LoginAppUser();
         user.setId(1L);
-        user.setName("测试用户");
-        user.setAge(28);
         return user;
     }
 }

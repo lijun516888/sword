@@ -1,6 +1,8 @@
 package com.sword.cloud.user.controller;
 
 import com.sword.cloud.model.UserDomain;
+import com.sword.cloud.model.user.AppUser;
+import com.sword.cloud.model.user.LoginAppUser;
 import com.sword.cloud.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,12 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(value = "/users-anon/internal", params = "username")
-    public UserDomain findByUsername(String username) {
+    public LoginAppUser findByUsername(String username) {
         return userService.findByUsername(username);
     }
 
     @GetMapping(value = "/users/external", params = "age")
-    public UserDomain findByUserage(String age) {
+    public LoginAppUser findByUserage(String age) {
         System.out.println("=================");
         return userService.findByUsername(age);
     }

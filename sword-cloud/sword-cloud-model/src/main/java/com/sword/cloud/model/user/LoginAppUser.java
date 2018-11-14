@@ -2,8 +2,7 @@ package com.sword.cloud.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Sets;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +15,10 @@ import java.util.Set;
 /**
  * spring security当前登录对象
  */
-@Getter
-@Setter
+@NoArgsConstructor
+@Data
+@ToString
+@EqualsAndHashCode
 public class LoginAppUser extends AppUser implements UserDetails {
 
 	private static final long serialVersionUID = 1753977564987556640L;

@@ -18,7 +18,8 @@ public class UserController {
 
     @GetMapping(value = "/users-anon/internal", params = "username")
     public LoginAppUser findByUsername(String username) {
-        return userService.findByUsername(username);
+        LoginAppUser loginAppUser = userService.findByUsername(username);
+        return loginAppUser;
     }
 
     @GetMapping(value = "/users/external", params = "age")

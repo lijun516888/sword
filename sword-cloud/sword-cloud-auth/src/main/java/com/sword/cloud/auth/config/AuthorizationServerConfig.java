@@ -3,7 +3,7 @@ package com.sword.cloud.auth.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -14,7 +14,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.AuthenticationKeyGenerator;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.annotation.Resource;
 import java.util.UUID;
@@ -27,7 +26,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private AuthenticationManager authenticationManager;
 
     @Resource
-    private RedisConnectionFactory redisConnectionFactory;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -38,7 +37,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Bean
     public TokenStore tokenStore() {
-        RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
+        SwRedisTokenStore redisTokenStore = new SwRedisTokenStore();
+        redisTokenStore.setRedisTemplate(redisTemplate);
         redisTokenStore.setAuthenticationKeyGenerator(new AuthorizationServerConfig.RandomAuthenticationKeyGenerator());
         return redisTokenStore;
     }

@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 8888
 spring:
   application:
     name: auth-center
@@ -7,9 +7,9 @@ spring:
     servlet:
       load-on-startup: 1
   redis:
-      host: 127.0.0.1
+      host: 192.168.31.236
       port: 6379
-      password: cqqycti
+      password: 12qwaszx!
       timeout: 10s
       lettuce:
         pool:
@@ -20,10 +20,10 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:6001/eureka/
+      defaultZone: http://192.168.31.236:6001/eureka/
     registry-fetch-interval-seconds: 5
   instance:
     lease-expiration-duration-in-seconds: 15
     lease-renewal-interval-in-seconds: 5
     prefer-ip-address: true
-    instance-id: ${spring.application.name}:${random.int}
+    instance-id: ${spring.application.name}:${server.port}

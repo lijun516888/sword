@@ -30,6 +30,7 @@ public class LoginAppUser extends AppUser implements UserDetails {
 		Set<String> permissions = Sets.newHashSet();
 		permissions.add("back:permission:save");
 		permissions.add("back:permission:update");
+		permissions.add("back:permission:delete");
 		if (!CollectionUtils.isEmpty(permissions)) {
 			permissions.forEach(per -> {
 				collection.add(new SimpleGrantedAuthority(per));

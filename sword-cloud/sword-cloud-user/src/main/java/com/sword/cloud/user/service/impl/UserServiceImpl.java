@@ -17,12 +17,12 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(true);
         user.setHeadImgUrl("");
         user.setNickname("");
-        user.setPassword("111111");
         user.setPhone("13132354113");
         user.setSex(1);
         user.setUpdateTime(new Date());
         user.setUsername("admin");
-        user.setType("admin");
+        user.setPassword("$2a$10$kCt9bLD81/YtRkSivGWl7uD0Pn6JnlNcYZeUIh2BTQeLHvWedm0qK");
+        user.setType("app");
         return user;
     }
 }

@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 7777
 spring:
   cloud:
     config:
@@ -13,13 +13,43 @@ spring:
       fail-fast: true
   application:
     name: user-center
+  redis:
+    host: 192.168.31.236
+    port: 6379
+    password: 12qwaszx!
+    timeout: 10s
+    lettuce:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1ms
+    mvc:
+      servlet:
+        load-on-startup: 1
+    aop:
+      proxy-target-class: true
+security:
+    oauth2:
+      resource:
+        user-info-uri: http://192.168.31.32:8888/user-me
+        prefer-token-info: false
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:6001/eureka/
+      defaultZone: http://192.168.31.236:6001/eureka/
     registry-fetch-interval-seconds: 5
   instance:
     lease-expiration-duration-in-seconds: 15
     lease-renewal-interval-in-seconds: 5
     prefer-ip-address: true
-    instance-id: ${spring.application.name}:${random.int}
+    instance-id: ${spring.application.name}:${server.port}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+

@@ -43,6 +43,7 @@
 		<netty-all.version>4.1.12.Final</netty-all.version>
 
 		<spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+		<security-oauth2.version>2.3.3.RELEASE</security-oauth2.version>
 	</properties>
 
 	<dependencyManagement>

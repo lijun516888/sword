@@ -162,7 +162,7 @@ public class WebUtils {
         String boundary = System.currentTimeMillis() + "";
         HttpURLConnection conn = null;
         OutputStream out = null;
-        String rsp = null;
+        String rsp;
         try {
             try {
                 String cType = "multipart/form-data;boundary=" + boundary + ";charset=" + charset;

@@ -391,7 +391,7 @@ public class WebUtils {
             fileParams.put("uploadFile2", fileItem2);
 
 
-            String rsp = WebUtils.doPost("http://127.0.0.1:8090/sword/testUploadFile", params, fileParams,2000, 2000);
+            String rsp = WebUtils.doPost("http://127.0.0.1:8090/sword/testUploadFile", params, fileParams,2000, 5000);
             System.out.println(rsp);
         } catch (Exception e) {
             e.printStackTrace();

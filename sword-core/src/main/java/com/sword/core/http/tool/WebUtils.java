@@ -1,10 +1,10 @@
 package com.sword.core.http.tool;
 
 import com.google.common.collect.Maps;
+import com.google.common.io.ByteStreams;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tomcat.util.http.fileupload.FileItem;
 
 import javax.net.ssl.*;
 import java.io.*;
@@ -112,14 +112,14 @@ public class WebUtils {
         return doPost(url, cType, content, connectTimeout, readTimeout);
     }
 
-    public static String doPost(String url, String ctype, byte[] content, int connectTimeout, int readTimeout) throws
+    public static String doPost(String url, String cType, byte[] content, int connectTimeout, int readTimeout) throws
             IOException {
         HttpURLConnection conn = null;
         OutputStream out = null;
         String rsp;
         try {
             try {
-                conn = getConnection(new URL(url), METHOD_POST, ctype);
+                conn = getConnection(new URL(url), METHOD_POST, cType);
                 conn.setConnectTimeout(connectTimeout);
                 conn.setReadTimeout(readTimeout);
             } catch (IOException e) {
@@ -184,12 +184,12 @@ public class WebUtils {
                 for(Map.Entry<String, FileItem> fileEntry : fileParams.entrySet()) {
                     FileItem fileItem = fileEntry.getValue();
                     byte[] fileBytes = getFileEntry(fileEntry.getKey(),
-                            fileItem.getFieldName(),
-                            fileItem.getContentType(),
+                            fileItem.getFileName(),
+                            fileItem.getMimeType(),
                             charset);
                     out.write(entryBoundaryBytes);
                     out.write(fileBytes);
-                    // out.write(fileItem.getContent());
+                    out.write(fileItem.getContent());
                 }
                 byte[] endBoundaryBytes = ("\r\n--" + boundary + "--\r\n").getBytes(charset);
                 out.write(endBoundaryBytes);
@@ -371,21 +371,32 @@ public class WebUtils {
     }
 
     public static void main(String[] args) {
-        Map<String, String> params = Maps.newHashMap();
         try {
-            params.put("phone$", "13594016242");
-            String rsp = WebUtils.doPost("http://127.0.0.1:8080/public/getPhoneArea.html", params, 10000, 10000);
+            Map<String, String> params = Maps.newHashMap();
+            params.put("userName", "abc");
+            File file = new File("/Users/lijun/works/temp/2.jpg");
+            InputStream inputStream = new FileInputStream(file);
+            Map<String, FileItem> fileParams = Maps.newHashMap();
+            FileItem fileItem1 = new FileItem();
+            fileItem1.setFileName(file.getName());
+            fileItem1.setContent(ByteStreams.toByteArray(inputStream));
+            fileParams.put("uploadFile1", fileItem1);
+
+
+            File file1 = new File("/Users/lijun/works/temp/3.jpg");
+            InputStream inputStream1 = new FileInputStream(file1);
+            FileItem fileItem2 = new FileItem();
+            fileItem2.setFileName(file1.getName());
+            fileItem2.setContent(ByteStreams.toByteArray(inputStream1));
+            fileParams.put("uploadFile2", fileItem2);
+
+
+            String rsp = WebUtils.doPost("http://127.0.0.1:8090/sword/testUploadFile", params, fileParams,2000, 5000);
             System.out.println(rsp);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        try {
-            params.put("phone$", "13594016242");
-            String rsp = WebUtils.doGet("http://127.0.0.1:8080/public/getPhoneArea.html", params, 1000, 1000);
-            System.out.println(rsp);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
 }

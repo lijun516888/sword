@@ -1,18 +1,18 @@
 server:
-  port: 7777
+  port: 8889
 spring:
   cloud:
     config:
       #uri: http://localhost:3344
       #label: master
-      name: user-center
+      name: work-center
       profile: dev
       discovery:
         enabled: true
         service-id: config-center
       fail-fast: true
   application:
-    name: user-center
+    name: work-center
   redis:
     host: 39.98.64.131
     port: 6379
@@ -52,4 +52,3 @@ management:
   endpoint:
     health:
       show-details: always
-

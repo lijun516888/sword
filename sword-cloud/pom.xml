@@ -24,6 +24,7 @@
 		<module>sword-cloud-auth</module>
 		<module>sword-cloud-model</module>
 		<module>sword-cloud-zuul</module>
+		<module>sword-cloud-work</module>
 	</modules>
 
 </project>

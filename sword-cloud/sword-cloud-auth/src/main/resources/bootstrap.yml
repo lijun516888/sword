@@ -7,7 +7,7 @@ spring:
     servlet:
       load-on-startup: 1
   redis:
-      host: 192.168.31.236
+      host: 127.0.0.1
       port: 6379
       password: 12qwaszx!
       timeout: 10s
@@ -20,7 +20,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://192.168.31.236:6001/eureka/
+      defaultZone: http://39.98.64.131:6001/eureka/
     registry-fetch-interval-seconds: 5
   instance:
     lease-expiration-duration-in-seconds: 15

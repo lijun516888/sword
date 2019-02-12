@@ -14,7 +14,7 @@ spring:
   application:
     name: user-center
   redis:
-    host: 192.168.31.236
+    host: 127.0.0.1
     port: 6379
     password: 12qwaszx!
     timeout: 10s
@@ -32,12 +32,12 @@ spring:
 security:
     oauth2:
       resource:
-        user-info-uri: http://192.168.31.32:8888/user-me
+        user-info-uri: http://127.0.0.1:8888/user-me
         prefer-token-info: false
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://192.168.31.236:6001/eureka/
+      defaultZone: http://39.98.64.131:6001/eureka/
     registry-fetch-interval-seconds: 5
   instance:
     lease-expiration-duration-in-seconds: 15

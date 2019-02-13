@@ -1,0 +1,54 @@
+server:
+  port: 8889
+spring:
+  cloud:
+    config:
+      #uri: http://localhost:3344
+      #label: master
+      name: work-center
+      profile: dev
+      discovery:
+        enabled: true
+        service-id: config-center
+      fail-fast: true
+  application:
+    name: work-center
+  redis:
+    host: 39.98.64.131
+    port: 6379
+    password: 12qwaszx!
+    timeout: 10s
+    lettuce:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1ms
+    mvc:
+      servlet:
+        load-on-startup: 1
+    aop:
+      proxy-target-class: true
+security:
+    oauth2:
+      resource:
+        user-info-uri: http://127.0.0.1:8888/user-me
+        prefer-token-info: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://39.98.64.131:6001/eureka/
+    registry-fetch-interval-seconds: 5
+  instance:
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

@@ -1,4 +1,4 @@
-package com.sword.cloud.auth.feign;
+package com.sword.cloud.zuul.feign;
 
 import com.sword.cloud.model.UserDomain;
 import org.springframework.cloud.openfeign.FeignClient;

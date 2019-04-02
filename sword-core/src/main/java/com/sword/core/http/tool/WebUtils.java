@@ -372,27 +372,30 @@ public class WebUtils {
 
     public static void main(String[] args) {
         try {
-            Map<String, String> params = Maps.newHashMap();
+            /*Map<String, String> params = Maps.newHashMap();
             params.put("userName", "abc");
-            File file = new File("/Users/lijun/works/temp/2.jpg");
+            File file = new File("E:/tool/phone.exe");
             InputStream inputStream = new FileInputStream(file);
             Map<String, FileItem> fileParams = Maps.newHashMap();
             FileItem fileItem1 = new FileItem();
             fileItem1.setFileName(file.getName());
             fileItem1.setContent(ByteStreams.toByteArray(inputStream));
-            fileParams.put("uploadFile1", fileItem1);
+            fileParams.put("file", fileItem1);
 
-
-            File file1 = new File("/Users/lijun/works/temp/3.jpg");
+            File file1 = new File("E:/tool/Chrome.exe");
             InputStream inputStream1 = new FileInputStream(file1);
             FileItem fileItem2 = new FileItem();
             fileItem2.setFileName(file1.getName());
             fileItem2.setContent(ByteStreams.toByteArray(inputStream1));
-            fileParams.put("uploadFile2", fileItem2);
+            fileParams.put("file", fileItem2);
 
+            String rsp = WebUtils.doPost("http://127.0.0.1:8080/public/uploadFile1.html",
+                    params, fileParams,2000,5000);
+            System.out.println(rsp);*/
 
-            String rsp = WebUtils.doPost("http://127.0.0.1:8090/sword/testUploadFile", params, fileParams,2000, 5000);
-            System.out.println(rsp);
+            String result = doPost("http://192.168.1.243:8000/admin/crmcustomer/page?page=1" +
+                    "&limit=10&access_token=edf8c07a-ed2d-42e7-9a4c-37ca23aab1c8", Maps.newHashMap(), 1000, 1000);
+            System.out.println("----:" + result);
         } catch (Exception e) {
             e.printStackTrace();
         }

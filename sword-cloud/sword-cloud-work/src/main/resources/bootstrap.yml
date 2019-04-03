@@ -1,5 +1,5 @@
 server:
-  port: 8889
+  port: 8886
 spring:
   cloud:
     config:
@@ -32,7 +32,7 @@ spring:
 security:
     oauth2:
       resource:
-        user-info-uri: http://127.0.0.1:8888/user-me
+        user-info-uri: http://127.0.0.1:8889/user-me
         prefer-token-info: false
 eureka:
   client:

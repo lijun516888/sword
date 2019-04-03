@@ -14,6 +14,7 @@ import io.netty.handler.stream.ChunkedWriteHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
+import io.netty.util.AttributeKey;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -49,7 +50,9 @@ public class NettyWsChannelIinitialize extends ChannelInitializer<SocketChannel>
                     handshaker = factory.newHandshaker(request);
                     handshaker.handshake(ctx.channel(), request);
                 }
-                NettyWsServer.cache.put("1001", ctx.channel());
+                AttributeKey<String> attributeKey = AttributeKey.valueOf("code");
+                ctx.channel().attr(attributeKey).getAndSet(request.uri().split("=")[1]);
+                NettyWsServer.cache.put(request.uri().split("=")[1], ctx.channel());
             } else if(msg instanceof CloseWebSocketFrame) {
                 WebSocketFrame frame = (WebSocketFrame) msg;
                 handshaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
@@ -75,6 +78,8 @@ public class NettyWsChannelIinitialize extends ChannelInitializer<SocketChannel>
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
             System.out.println("=============exceptionCaught============");
+            AttributeKey<String> attributeKey = AttributeKey.valueOf("code");
+            NettyWsServer.cache.remove(ctx.channel().attr(attributeKey).get());
             super.exceptionCaught(ctx, cause);
         }
 
@@ -99,6 +104,8 @@ public class NettyWsChannelIinitialize extends ChannelInitializer<SocketChannel>
         @Override
         public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
             System.out.println("=============handlerRemoved============");
+            AttributeKey<String> attributeKey = AttributeKey.valueOf("code");
+            NettyWsServer.cache.remove(ctx.channel().attr(attributeKey).get());
             super.handlerRemoved(ctx);
         }
 

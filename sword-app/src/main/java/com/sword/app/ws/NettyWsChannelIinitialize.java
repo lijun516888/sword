@@ -9,6 +9,7 @@ import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.QueryStringDecoder;
+import io.netty.handler.codec.http.websocketx.*;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
@@ -48,6 +49,7 @@ public class NettyWsChannelIinitialize extends ChannelInitializer<SocketChannel>
                     handshaker = factory.newHandshaker(request);
                     handshaker.handshake(ctx.channel(), request);
                 }
+                NettyWsServer.cache.put("1001", ctx.channel());
             } else if(msg instanceof CloseWebSocketFrame) {
                 WebSocketFrame frame = (WebSocketFrame) msg;
                 handshaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
@@ -120,6 +122,7 @@ public class NettyWsChannelIinitialize extends ChannelInitializer<SocketChannel>
 
         @Override
         public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+            System.out.println("=============userEventTriggered============");
             if(evt instanceof IdleStateEvent) {
                 IdleStateEvent event = (IdleStateEvent) evt;
                 if(event.state() == IdleState.READER_IDLE) {

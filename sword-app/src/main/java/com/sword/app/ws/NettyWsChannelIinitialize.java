@@ -24,7 +24,7 @@ public class NettyWsChannelIinitialize extends ChannelInitializer<SocketChannel>
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline pipeline = socketChannel.pipeline();
-        pipeline.addLast(new IdleStateHandler(20, 15,0, TimeUnit.SECONDS));
+        pipeline.addLast(new IdleStateHandler(0, 0,5, TimeUnit.SECONDS));
         pipeline.addLast(new HttpServerCodec());
         pipeline.addLast(new ChunkedWriteHandler());
         pipeline.addLast(new HttpObjectAggregator(64 * 1024));
@@ -133,14 +133,18 @@ public class NettyWsChannelIinitialize extends ChannelInitializer<SocketChannel>
             if(evt instanceof IdleStateEvent) {
                 IdleStateEvent event = (IdleStateEvent) evt;
                 if(event.state() == IdleState.READER_IDLE) {
-                    ctx.close();
+                    // ctx.close();
+                    System.out.println("=============IdleState.READER_IDLE============");
                 }
                 if(event.state() == IdleState.WRITER_IDLE) {
                     PingWebSocketFrame frame = new PingWebSocketFrame();
                     ctx.channel().writeAndFlush(frame);
+                    System.out.println("=============IdleState.WRITER_IDLE============");
                 }
                 if(event.state() == IdleState.ALL_IDLE) {
-
+                    PingWebSocketFrame frame = new PingWebSocketFrame();
+                    ctx.channel().writeAndFlush(frame);
+                    System.out.println("=============IdleState.ALL_IDLE============");
                 }
             }
             super.userEventTriggered(ctx, evt);

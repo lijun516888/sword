@@ -62,7 +62,7 @@ public class NettyWsServer {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        });
     }
 
 }

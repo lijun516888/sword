@@ -13,6 +13,7 @@ public class XfireDemo {
     private static int RETRY_TIMES = 1;
     private static int SO_TIMEOUT = 1000 * 60 * 3;
 
+
     public static void main(String[] args) {
         ObjectInterface onLineClient;
         org.codehaus.xfire.service.Service serviceModel = new ObjectServiceFactory().create(ObjectInterface.class);

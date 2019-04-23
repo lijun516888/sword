@@ -19,6 +19,7 @@ public class Digests {
         return Hex.encodeHexString(bytes);
     }
 
+
     public static byte[] digest(byte[] input, byte[] salt, int interations) {
         return digest(input, MD5, salt, interations);
     }

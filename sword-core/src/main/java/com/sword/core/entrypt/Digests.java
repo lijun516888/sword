@@ -1,7 +1,5 @@
 package com.sword.core.entrypt;
 
-import org.apache.commons.codec.binary.Hex;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -16,7 +14,8 @@ public class Digests {
     public static String generateRandom(int numBytes) {
         byte[] bytes = new byte[numBytes];
         random.nextBytes(bytes);
-        return Hex.encodeHexString(bytes);
+        // return Hex.encodeHexString(bytes);
+        return "";
     }
 
     public static byte[] digest(byte[] input, byte[] salt, int interations) {

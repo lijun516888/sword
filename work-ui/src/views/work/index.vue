@@ -47,6 +47,8 @@
             <el-form-item label="完成时间" prop="finishTime">
               <el-date-picker v-model="workForm.finishTime" type="datetime" placeholder="选择日期时间" style="width: 100%;"/>
             </el-form-item>
+            <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="doSaveWork">发布
+            </el-button>
           </el-card>
         </el-col>
         <el-col :span="16">
@@ -63,6 +65,7 @@
 </template>
 <script>
 import MarkdownEditor from '@/components/MarkdownEditor'
+import { doSaveWork } from '@/api/work'
 
 export default {
   components: { MarkdownEditor },
@@ -84,6 +87,18 @@ export default {
           { min: 3, max: 5, message: '长度在3到5个字符', trigger: 'blur' }
         ]
       }
+    }
+  },
+  methods: {
+    doSaveWork() {
+      this.loading = true
+      doSaveWork(this.workForm).then(response => {
+        this.$message({
+          message: '成功',
+          type: 'warning'
+        })
+        this.loading = false
+      })
     }
   }
 }

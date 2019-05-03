@@ -1,12 +1,5 @@
 package com.sword.core.ws;
 
-import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
-import org.apache.commons.httpclient.params.HttpClientParams;
-import org.codehaus.xfire.client.Client;
-import org.codehaus.xfire.client.XFireProxyFactory;
-import org.codehaus.xfire.service.binding.ObjectServiceFactory;
-import org.codehaus.xfire.transport.http.CommonsHttpMessageSender;
-
 public class XfireDemo {
 
     private static long TIME_OUT = 1000 * 60 * 3l;
@@ -15,7 +8,7 @@ public class XfireDemo {
 
 
     public static void main(String[] args) {
-        ObjectInterface onLineClient;
+        /*ObjectInterface onLineClient;
         org.codehaus.xfire.service.Service serviceModel = new ObjectServiceFactory().create(ObjectInterface.class);
         XFireProxyFactory serviceFactory = new XFireProxyFactory();
         HttpClientParams params = new HttpClientParams();
@@ -32,7 +25,7 @@ public class XfireDemo {
             System.out.println(result);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 }

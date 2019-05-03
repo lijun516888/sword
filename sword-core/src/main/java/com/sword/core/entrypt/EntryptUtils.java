@@ -1,10 +1,7 @@
 package com.sword.core.entrypt;
 
-import org.junit.Test;
-
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -15,7 +12,6 @@ import java.security.NoSuchAlgorithmException;
 
 public class EntryptUtils {
 
-    @Test
     public void secretEncrypt() {
         try {
             Cipher cipher = Cipher.getInstance("AES");
@@ -40,7 +36,6 @@ public class EntryptUtils {
         }
     }
 
-    @Test
     public void secretDecrypt() {
         try {
             Cipher cipher = Cipher.getInstance("AES");

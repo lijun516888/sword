@@ -9,7 +9,6 @@ import com.sword.app.service.UserService;
 import com.sword.core.dto.JsonEntity;
 import com.sword.core.utils.Dates;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,9 +33,6 @@ public class SwordController {
 
     @Autowired
     private OrderService orderService;
-
-    @Resource
-    private RedisTemplate<String, String> redisTemplate;
 
     @ResponseBody
     @RequestMapping(value = "redis")
